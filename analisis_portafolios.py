@@ -47,8 +47,8 @@ tickers = [t.strip().upper() for t in tickers_input.split(",") if t.strip() != "
 
 
 # Rango de fechas
-fecha_inicio = st.sidebar.date_input("📅 Fecha inicial", pd.to_datetime("2020-01-01"))
-fecha_fin = st.sidebar.date_input("📅 Fecha final", pd.to_datetime("2023-12-31"))
+fecha_inicio = st.sidebar.date_input("📅 Fecha Inicial", pd.to_datetime("2020-01-01"))
+fecha_fin = st.sidebar.date_input("📅 Fecha Final", pd.to_datetime("2023-12-31"))
 
 # Inversión inicial
 inversion_inicial = st.sidebar.number_input("💰 Inversión Inicial (USD)", min_value=1000, value=10000, step=500)
@@ -66,12 +66,12 @@ descargar = st.sidebar.button("📥 Descargar y Analizar")
 # Descarga de datos
 
 data = yf.download(tickers, start=fecha_inicio, end=fecha_fin)["Close"]
-st.subheader("📊 Datos Históricos Descargados")
+st.subheader("📊 Datos Descargados")
 st.dataframe(data.tail())
 
 # Visualización de Precios
 
-st.subheader("📈 Evolución Histórica de Precios")
+st.subheader("📈 Evolución de Precios")
 fig1, ax1 = plt.subplots(figsize=(10, 4))
 data.plot(ax=ax1)
 plt.title("Evolución de Precios Ajustados")
