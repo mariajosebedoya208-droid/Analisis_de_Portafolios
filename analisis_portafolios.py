@@ -160,13 +160,13 @@ st.pyplot(fig3)
 
 #  Correlaciones
 
-st.subheader("🔥 Matriz de Correlaciones entre Activos")
+st.subheader("🔥 Correlaciones entre Activos")
 corr_matrix = returns[tickers].corr()
 st.dataframe(corr_matrix)
 
 fig4, ax4 = plt.subplots()
 cax = ax4.imshow(corr_matrix, cmap="coolwarm", interpolation="nearest")
-plt.title("Correlaciones")
+plt.title("Matriz de Correlaciones")
 plt.colorbar(cax)
 ax4.set_xticks(range(len(corr_matrix)))
 ax4.set_xticklabels(corr_matrix.columns, rotation=45)
