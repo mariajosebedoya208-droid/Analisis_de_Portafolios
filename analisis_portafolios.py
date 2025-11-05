@@ -34,27 +34,28 @@ Los datos se obtienen directamente desde **Yahoo Finance**, y los activos selecc
 
 # Configuración de entradas
 
-st.sidebar.header("⚙️ Configuración del análisis")
+st.sidebar.markdown("## ⚙️ Configuración del análisis")
 
-lista_tickers = ['AAPL', 'MSFT', 'META']
-tickers = st.multiselect("Elija un ticker o varios", lista_tickers, default=['AAPL'])
-descargar = st.button("Descargar")
+# Selección de activos
+lista_tickers = ['AAPL', 'MSFT', 'META', 'GOOGL', 'AMZN', 'NVDA']
+tickers = st.sidebar.multiselect("Seleccione los activos", lista_tickers, default=['AAPL', 'MSFT'])
 
-fecha_inicio = st.date_input("Fecha inicial", pd.to_datetime("2020-01-01"))
-fecha_fin = st.date_input("Fecha final", pd.to_datetime("2023-12-31"))
-inversion_inicial = st.number_input("Inversión inicial (USD)", min_value=1000, value=10000)
-frecuencia = st.selectbox("Frecuencia temporal", ["Diaria", "Mensual"])
+# Rango de fechas
+fecha_inicio = st.sidebar.date_input("📅 Fecha inicial", pd.to_datetime("2020-01-01"))
+fecha_fin = st.sidebar.date_input("📅 Fecha final", pd.to_datetime("2023-12-31"))
 
-if descargar:
-    if not tickers:
-        st.warning("⚠️ Debes seleccionar al menos un ticker para descargar datos.")
-    else:
-        with st.spinner("📥 Descargando datos desde Yahoo Finance..."):
-            data = yf.download(tickers, start=fecha_inicio, end=fecha_fin)["Adj Close"]
-            st.success("✅ Datos descargados correctamente.")
-            st.dataframe(data.tail())
-else:
-    st.info("👈 Selecciona los activos y presiona **Descargar** para iniciar.")
+# Inversión inicial
+inversion_inicial = st.sidebar.number_input("💰 Inversión inicial (USD)", min_value=1000, value=10000, step=500)
+
+# Frecuencia temporal
+frecuencia = st.sidebar.selectbox("⏱️ Frecuencia temporal", ["Diaria", "Semanal", "Mensual"])
+
+# Tipo de escenario
+escenario = st.sidebar.selectbox("📊 Escenario de inversión", ["Conservador", "Moderado", "Agresivo"])
+
+# Botón para ejecutar
+descargar = st.sidebar.button("📥 Descargar y analizar")
+
 
 # Descarga de datos
 
