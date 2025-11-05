@@ -59,7 +59,7 @@ descargar = st.sidebar.button("📥 Descargar y analizar")
 
 # Descarga de datos
 
-data = yf.download(tickers, start=fecha_inicio, end=fecha_fin)["Adj Close"]
+data = yf.download(tickers, start=fecha_inicio, end=fecha_fin)["Close"]
 st.subheader("📊 Datos históricos descargados")
 st.dataframe(data.tail())
 
