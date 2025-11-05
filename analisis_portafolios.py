@@ -140,24 +140,21 @@ asset_risk = returns[tickers].std() * np.sqrt(252)
 x_riesgo = asset_risk.values
 y_retorno = asset_returns.values
 
+# Crear el gráfico
 fig3, ax3 = plt.subplots(figsize=(7, 5))
 
-# Graficar los activos individuales
-ax3.scatter(x_riesgo, y_retorno, c='orange', s=80, label='Activos individuales')
+# Graficar los activos individuales (solo puntos)
+ax3.scatter(x_riesgo, y_retorno, c='blue', s=80)
 
 # Etiquetar cada punto con su ticker
 for i, ticker in enumerate(tickers):
-    ax3.text(x_riesgo[i], y_retorno[i], ticker, fontsize=9, ha='right')
+    ax3.text(x_riesgo[i] + 0.002, y_retorno[i], ticker, fontsize=9, ha='left', va='center')
 
-# Graficar el portafolio
-ax3.scatter(port_volatility, port_return, c='blue', s=150, marker='*', label='Portafolio Óptimo')
-
-# Etiquetas y formato
+# Etiquetas y estilo
 ax3.set_xlabel("Volatilidad (Riesgo)")
 ax3.set_ylabel("Rendimiento Esperado")
 ax3.set_title("Diagrama Riesgo - Retorno")
-ax3.legend()
-ax3.grid(True)
+ax3.grid(True, linestyle='--', alpha=0.6)
 
 st.pyplot(fig3)
 
