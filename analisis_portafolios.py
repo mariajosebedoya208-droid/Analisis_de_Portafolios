@@ -34,7 +34,7 @@ Los datos se obtienen directamente desde **Yahoo Finance**, y los activos selecc
 
 # Configuración de entradas
 
-st.sidebar.markdown("## ⚙️ Configuración del análisis")
+st.sidebar.markdown("## ⚙️ Configuración del Análisis")
 
 # Selección de activos
 lista_tickers = ['AAPL', 'MSFT', 'META', 'GOOGL', 'AMZN', 'NVDA']
@@ -45,30 +45,30 @@ fecha_inicio = st.sidebar.date_input("📅 Fecha inicial", pd.to_datetime("2020-
 fecha_fin = st.sidebar.date_input("📅 Fecha final", pd.to_datetime("2023-12-31"))
 
 # Inversión inicial
-inversion_inicial = st.sidebar.number_input("💰 Inversión inicial (USD)", min_value=1000, value=10000, step=500)
+inversion_inicial = st.sidebar.number_input("💰 Inversión Inicial (USD)", min_value=1000, value=10000, step=500)
 
 # Frecuencia temporal
-frecuencia = st.sidebar.selectbox("⏱️ Frecuencia temporal", ["Diaria", "Semanal", "Mensual"])
+frecuencia = st.sidebar.selectbox("⏱️ Frecuencia Temporal", ["Diaria", "Semanal", "Mensual"])
 
 # Tipo de escenario
-escenario = st.sidebar.selectbox("📊 Escenario de inversión", ["Conservador", "Moderado", "Agresivo"])
+escenario = st.sidebar.selectbox("📊 Escenario de Inversión", ["Conservador", "Moderado", "Agresivo"])
 
 # Botón para ejecutar
-descargar = st.sidebar.button("📥 Descargar y analizar")
+descargar = st.sidebar.button("📥 Descargar y Analizar")
 
 
 # Descarga de datos
 
 data = yf.download(tickers, start=fecha_inicio, end=fecha_fin)["Close"]
-st.subheader("📊 Datos históricos descargados")
+st.subheader("📊 Datos Históricos Descargados")
 st.dataframe(data.tail())
 
-# Visualización de precios
+# Visualización de Precios
 
-st.subheader("📈 Evolución histórica de precios")
+st.subheader("📈 Evolución Histórica de Precios")
 fig1, ax1 = plt.subplots(figsize=(10, 4))
 data.plot(ax=ax1)
-plt.title("Evolución de precios ajustados")
+plt.title("Evolución de Precios Ajustados")
 plt.xlabel("Fecha")
 plt.ylabel("Precio (USD)")
 st.pyplot(fig1)
@@ -84,7 +84,7 @@ st.dataframe(returns.describe().T)
 
 # Escenario de inversión
 
-st.sidebar.header("💰 Escenario de inversión")
+st.sidebar.header("💰 Escenario de Inversión")
 escenario = st.sidebar.selectbox("Seleccione el tipo de portafolio", ["Conservador", "Moderado", "Agresivo"])
 
 escenarios = {
@@ -117,7 +117,7 @@ st.write(f"**Sharpe Ratio:** {sharpe_ratio:.2f}")
 
 # Evolución del valor monetario
 
-st.subheader("💵 Evolución del valor del portafolio")
+st.subheader("💵 Evolución del Valor del Portafolio")
 fig2, ax2 = plt.subplots(figsize=(10, 4))
 valor_portafolio.plot(ax=ax2, color='green')
 plt.title("Evolución del valor monetario del portafolio")
@@ -137,7 +137,7 @@ st.pyplot(fig3)
 
 #  Correlaciones
 
-st.subheader("🔥 Matriz de correlaciones entre activos")
+st.subheader("🔥 Matriz de Correlaciones entre Activos")
 corr_matrix = returns[tickers].corr()
 st.dataframe(corr_matrix)
 
@@ -153,16 +153,16 @@ st.pyplot(fig4)
 
 # Visualización del portafolio
 
-st.subheader("🥧 Distribución del portafolio por escenario")
+st.subheader("🥧 Distribución del Portafolio por Escenario")
 
 fig, ax = plt.subplots()
 ax.pie(weights, labels=tickers, autopct="%1.1f%%", startangle=90)
-ax.set_title(f"Distribución del portafolio ({escenario})")
+ax.set_title(f"Distribución del Portafolio ({escenario})")
 st.pyplot(fig)
 
 # Distribución de pesos por escenario
 
-st.subheader("📊 Comparación de escenarios de inversión")
+st.subheader("📊 Comparación de Escenarios de Inversión")
 
 fig_all, axs = plt.subplots(1, 3, figsize=(12, 4))
 for i, (nombre, w) in enumerate({
@@ -174,5 +174,5 @@ for i, (nombre, w) in enumerate({
     axs[i].pie(w, labels=tickers, autopct='%1.1f%%', startangle=90)
     axs[i].set_title(nombre)
 
-plt.suptitle("Distribución de pesos por tipo de portafolio")
+plt.suptitle("Distribución de Pesos por Tipo de Portafolio")
 st.pyplot(fig_all)
