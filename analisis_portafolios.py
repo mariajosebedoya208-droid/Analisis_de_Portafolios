@@ -166,7 +166,7 @@ st.dataframe(corr_matrix)
 
 fig4, ax4 = plt.subplots()
 cax = ax4.imshow(corr_matrix, cmap="coolwarm", interpolation="nearest")
-plt.title("Heatmap de Correlaciones")
+plt.title("Correlaciones")
 plt.colorbar(cax)
 ax4.set_xticks(range(len(corr_matrix)))
 ax4.set_xticklabels(corr_matrix.columns, rotation=45)
