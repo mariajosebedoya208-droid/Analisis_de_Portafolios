@@ -57,7 +57,7 @@ inversion_inicial = st.sidebar.number_input("💰 Inversión Inicial (USD)", min
 frecuencia = st.sidebar.selectbox("⏱️ Frecuencia Temporal", ["Diaria", "Semanal", "Mensual"])
 
 # Tipo de escenario
-escenario = st.sidebar.selectbox("📊 Escenario de Inversión", ["Conservador", "Moderado", "Agresivo"])
+escenario = st.sidebar.selectbox("💰 Escenario de Inversión", ["Conservador", "Moderado", "Agresivo"])
 
 # Botón para ejecutar
 descargar = st.sidebar.button("📥 Descargar y Analizar")
@@ -89,9 +89,6 @@ cov_matrix = returns.cov() * 252
 st.dataframe(returns.describe().T)
 
 # Escenario de inversión
-
-st.sidebar.header("💰 Escenario de Inversión")
-escenario = st.sidebar.selectbox("Seleccione el tipo de portafolio", ["Conservador", "Moderado", "Agresivo"])
 
 escenarios = {
     "Conservador": np.array([0.6, 0.3, 0.1])[:len(tickers)],
