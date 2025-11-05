@@ -80,7 +80,7 @@ mean_returns = returns.mean() * 252
 cov_matrix = returns.cov() * 252
 
 # Estadísticas generales
-display(returns.describe().T)
+st.dataframe(returns.describe().T)
 
 # Escenario de inversión
 
