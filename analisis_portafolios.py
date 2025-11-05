@@ -130,7 +130,7 @@ st.pyplot(fig2)
 
 # Diagrama riesgo - retorno
 
-t.subheader("📊 Diagrama Riesgo - Retorno")
+st.subheader("📊 Diagrama Riesgo - Retorno")
 
 # Asegurar que solo se usen los tickers seleccionados
 asset_returns = mean_returns[tickers]
