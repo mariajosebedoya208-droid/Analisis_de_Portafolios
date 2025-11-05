@@ -34,7 +34,7 @@ Los datos se obtienen directamente desde **Yahoo Finance**, y los activos selecc
 
 # Configuración de entradas
 
-st.sidebar.markdown("## ⚙️ Configuración comparativa")
+st.sidebar.markdown("## ⚙️ Configuración del Análisis")
 
 # Entrada libre de tickers
 tickers_input = st.sidebar.text_input(
