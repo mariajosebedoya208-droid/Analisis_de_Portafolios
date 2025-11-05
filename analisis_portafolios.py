@@ -33,14 +33,14 @@ fecha_fin = st.sidebar.date_input("Fecha final", pd.to_datetime("2023-12-31"))
 inversion_inicial = st.sidebar.number_input("Inversión inicial (USD)", min_value=1000, value=10000)
 frecuencia = st.sidebar.selectbox("Frecuencia temporal", ["Diaria", "Mensual"])
 
-if len(tickers) == 0:
-    st.warning("Seleccione al menos un activo para continuar.")
-    st.stop()
-
 # Lista de tickers
 
 lista_tickers = ['AAPL', 'MSFT', 'META']
 st.write("Tickers Disponibles:", lista_tickers)
+
+if len(tickers) == 0:
+    st.warning("Seleccione al menos un activo para continuar.")
+    st.stop()
 
 # Selector interactivo
 
