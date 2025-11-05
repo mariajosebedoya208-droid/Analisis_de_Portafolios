@@ -39,7 +39,7 @@ st.sidebar.markdown("## ⚙️ Configuración comparativa")
 # Entrada libre de tickers
 tickers_input = st.sidebar.text_input(
     "Empresas (separa por comas):",
-    value="AAPL, MSFT, META"
+    value="AAPL, META"
 )
 
 # Convertir texto en lista
