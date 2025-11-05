@@ -156,7 +156,7 @@ st.pyplot(fig4)
 st.subheader("🥧 Distribución del portafolio por escenario")
 
 fig, ax = plt.subplots()
-ax.pie(weights, labels=lista_tickers, autopct="%1.1f%%", startangle=90)
+ax.pie(weights, labels=tickers, autopct="%1.1f%%", startangle=90)
 ax.set_title(f"Distribución del portafolio ({escenario})")
 st.pyplot(fig)
 
