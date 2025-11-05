@@ -34,11 +34,17 @@ Los datos se obtienen directamente desde **Yahoo Finance**, y los activos selecc
 
 # Configuración de entradas
 
-st.sidebar.markdown("## ⚙️ Configuración del Análisis")
+st.sidebar.markdown("## ⚙️ Configuración comparativa")
 
-# Selección de activos
-lista_tickers = ['AAPL', 'MSFT', 'META', 'GOOGL', 'AMZN', 'NVDA']
-tickers = st.sidebar.multiselect("Seleccione los activos", lista_tickers, default=['AAPL', 'MSFT'])
+# Entrada libre de tickers
+tickers_input = st.sidebar.text_input(
+    "Empresas (separa por comas):",
+    value="AAPL, MSFT, META"
+)
+
+# Convertir texto en lista
+tickers = [t.strip().upper() for t in tickers_input.split(",") if t.strip() != ""]
+
 
 # Rango de fechas
 fecha_inicio = st.sidebar.date_input("📅 Fecha inicial", pd.to_datetime("2020-01-01"))
