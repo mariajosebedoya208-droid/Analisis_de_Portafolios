@@ -131,11 +131,28 @@ st.pyplot(fig2)
 # Diagrama riesgo - retorno
 
 st.subheader("📊 Diagrama Riesgo - Retorno")
-fig3, ax3 = plt.subplots()
-ax3.scatter(port_volatility, port_return, c='blue', s=100)
+
+# Cálculo del riesgo (volatilidad) y retorno esperado individual de cada activo
+asset_returns = mean_returns
+asset_risk = returns.std() * np.sqrt(252)
+
+fig3, ax3 = plt.subplots(figsize=(7, 5))
+
+# Graficar los activos individuales
+ax3.scatter(asset_risk, asset_returns, c='orange', s=80, label='Activos individuales')
+for i, ticker in enumerate(tickers):
+    ax3.text(asset_risk[i], asset_returns[i], ticker, fontsize=9, ha='right')
+
+# Graficar el portafolio total
+ax3.scatter(port_volatility, port_return, c='blue', s=150, marker='*', label='Portafolio Óptimo')
+
+# Etiquetas y estilo
 ax3.set_xlabel("Volatilidad (Riesgo)")
 ax3.set_ylabel("Rendimiento Esperado")
 ax3.set_title("Diagrama Riesgo - Retorno")
+ax3.legend()
+ax3.grid(True)
+
 st.pyplot(fig3)
 
 #  Correlaciones
