@@ -198,5 +198,3 @@ for i, (nombre, w) in enumerate({
 
 plt.suptitle("Distribución de Pesos por Tipo de Portafolio")
 st.pyplot(fig_all)
-
-st.info("💡 Consejo: Diversificar entre activos con baja correlación puede reducir el riesgo del portafolio.")
