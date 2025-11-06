@@ -129,6 +129,8 @@ if descargar:
     if len(tickers) == 0:
         st.error("❌ No se encontraron tickers válidos")
         st.stop()
+else:
+    st.info("👈 Configura los parámetros en la barra lateral y haz clic en 'Descargar y Analizar' para comenzar el análisis.")
 
 
 
