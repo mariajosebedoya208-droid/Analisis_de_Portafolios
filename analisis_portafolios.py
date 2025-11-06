@@ -43,7 +43,6 @@ tickers_input = st.sidebar.text_input(
 # Convertir texto en lista
 tickers = [t.strip().upper() for t in tickers_input.split(",") if t.strip() != ""]
 
-
 # Rango de fechas
 fecha_inicio = st.sidebar.date_input("📅 Fecha Inicial", pd.to_datetime("2020-01-01"))
 fecha_fin = st.sidebar.date_input("📅 Fecha Final", pd.to_datetime("2023-12-31"))
@@ -59,7 +58,6 @@ escenario = st.sidebar.selectbox("💰 Escenario de Inversión", ["Conservador",
 
 # Botón para ejecutar
 descargar = st.sidebar.button("📥 Descargar y Analizar")
-
 
 # Descarga de datos
 
