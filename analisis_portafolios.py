@@ -19,23 +19,6 @@ import matplotlib.pyplot as plt
 
 st.markdown("<h1 style='text-align: center; color:#004aad;'>Smart Portafolio - Simulación de Escenarios</h1>", unsafe_allow_html=True)
 
-st.markdown("""
-<div style="
-    background: linear-gradient(90deg, #009970, #00c47a);
-    padding: 20px;
-    border-radius: 12px;
-    text-align: center;
-    color: white;
-    font-family: 'Trebuchet MS', sans-serif;
-">
-    <h1 style="margin-bottom: 5px;">💼 Smart Portafolio</h1>
-    <h4 style="margin-top: 0;">Simulación de Escenarios de Inversión</h4>
-    <p style="font-size:16px; opacity:0.9;">
-        Conservador • Moderado • Agresivo
-    </p>
-</div>
-""", unsafe_allow_html=True)
-
 st.write("""
 Esta aplicación realiza una **simulación de escenarios de inversión**, aplicando la *Teoría Moderna de Portafolios de Markowitz*.
 
