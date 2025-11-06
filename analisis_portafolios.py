@@ -17,11 +17,17 @@ import numpy as np
 import yfinance as yf
 import matplotlib.pyplot as plt
 
-st.title ("💼 Smart Portafolio")
+st.title ("💼 Smart Portafolio - Simulación de Escenarios")
 st.write("""
-Esta aplicación analiza un portafolio de inversión.
-Se simulan tres escenarios (Conservador, Moderado y Agresivo) para observar cómo varían el riesgo, el rendimiento y la composición de activos.
-Los datos se obtienen directamente desde **Yahoo Finance**.
+Esta aplicación realiza una **simulación de escenarios de inversión**, aplicando la *Teoría Moderna de Portafolios de Markowitz*.
+
+Se analizan tres tipos de portafolios según el perfil de riesgo del inversionista:
+
+- 🟩 **Conservador:** prioriza la estabilidad, minimizando el riesgo.  
+- 🟨 **Moderado:** busca equilibrio entre riesgo y rentabilidad.  
+- 🟥 **Agresivo:** asume un riesgo alto para intentar maximizar las ganancias.
+
+Los datos se obtienen directamente desde **Yahoo Finance**, permitiendo analizar empresas reales del mercado financiero.
 """)
 
 # Configuración de entradas
@@ -117,6 +123,16 @@ st.write(f"**Rendimiento Esperado:** {port_return:.2%}")
 st.write(f"**Volatilidad Esperada:** {port_volatility:.2%}")
 st.write(f"**Sharpe Ratio:** {sharpe_ratio:.2f}")
 
+st.markdown("---")
+st.subheader("🧠 Interpretación del Escenario Seleccionado")
+
+if escenario == "Conservador":
+    st.info("🔹 Este portafolio busca minimizar el riesgo, con un enfoque en estabilidad. Su rendimiento esperado es menor, pero ofrece menor volatilidad y pérdidas potenciales.")
+elif escenario == "Moderado":
+    st.info("🟨 Este portafolio equilibra riesgo y rendimiento. Es ideal para inversores con tolerancia media al riesgo que buscan un crecimiento sostenido.")
+else:
+    st.info("🔺 Este portafolio asume mayor riesgo con el objetivo de maximizar el rendimiento. Es adecuado para inversionistas con alta tolerancia a la volatilidad y posibles pérdidas.")
+
 # Evolución del valor monetario
 
 st.subheader("💵 Evolución del Valor del Portafolio")
@@ -198,3 +214,30 @@ for i, (nombre, w) in enumerate({
 
 plt.suptitle("Distribución de Pesos por Tipo de Portafolio")
 st.pyplot(fig_all)
+
+# Diagrama Comparativo
+
+st.subheader("📉 Comparación de Escenarios - Riesgo vs Rendimiento")
+
+escenario_rend = {
+    "Conservador": np.dot(escenarios["Conservador"], mean_returns),
+    "Moderado": np.dot(escenarios["Moderado"], mean_returns),
+    "Agresivo": np.dot(escenarios["Agresivo"], mean_returns)
+}
+
+escenario_riesgo = {
+    "Conservador": np.sqrt(np.dot(escenarios["Conservador"].T, np.dot(cov_matrix, escenarios["Conservador"]))),
+    "Moderado": np.sqrt(np.dot(escenarios["Moderado"].T, np.dot(cov_matrix, escenarios["Moderado"]))),
+    "Agresivo": np.sqrt(np.dot(escenarios["Agresivo"].T, np.dot(cov_matrix, escenarios["Agresivo"])))
+}
+
+fig, ax = plt.subplots()
+ax.scatter(escenario_riesgo.values(), escenario_rend.values(), c=['green','orange','red'], s=100)
+
+for i, nombre in enumerate(escenario_rend.keys()):
+    ax.text(list(escenario_riesgo.values())[i]+0.001, list(escenario_rend.values())[i], nombre, fontsize=9)
+
+ax.set_xlabel("Volatilidad (Riesgo)")
+ax.set_ylabel("Rendimiento Esperado")
+ax.set_title("Comparación de Escenarios de Inversión")
+st.pyplot(fig)
