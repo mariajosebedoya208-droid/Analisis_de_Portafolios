@@ -69,6 +69,41 @@ data = yf.download(tickers, start=fecha_inicio, end=fecha_fin)["Close"]
 st.subheader("📊 Datos Descargados")
 st.dataframe(data.tail())
 
+# Funciones de exportación
+
+# Excel
+rom io import BytesIO
+
+excel_buffer = BytesIO()
+data.to_excel(excel_buffer, index=True)
+st.download_button(
+    label="📊 Descargar Datos en Excel",
+    data=excel_buffer.getvalue(),
+    file_name="portafolio.xlsx",
+    mime="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
+)
+
+# PDF
+from reportlab.lib.pagesizes import letter
+from reportlab.pdfgen import canvas
+from io import BytesIO
+
+pdf_buffer = BytesIO()
+c = canvas.Canvas(pdf_buffer, pagesize=letter)
+c.drawString(100, 750, "Reporte del Portafolio de Inversión")
+c.drawString(100, 730, f"Escenario: {escenario}")
+c.drawString(100, 710, f"Rendimiento esperado: {port_return:.2%}")
+c.drawString(100, 690, f"Volatilidad esperada: {port_volatility:.2%}")
+c.drawString(100, 670, f"Sharpe Ratio: {sharpe_ratio:.2f}")
+c.save()
+
+st.download_button(
+    label="📄 Descargar Reporte en PDF",
+    data=pdf_buffer.getvalue(),
+    file_name="reporte_portafolio.pdf",
+    mime="application/pdf"
+)
+
 # Visualización de Precios
 
 st.subheader("📈 Evolución de Precios")
