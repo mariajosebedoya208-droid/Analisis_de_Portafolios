@@ -443,7 +443,3 @@ def calculate_max_drawdown(returns):
     rolling_max = cumulative.expanding().max()
     drawdown = (cumulative - rolling_max) / rolling_max
     return drawdown.min()
-
-# 4. Métricas adicionales
-st.metric("Máxima Pérdida", f"{max_drawdown:.2%}")
-st.metric("Ratio de Sortino", f"{sortino_ratio:.2f}")
