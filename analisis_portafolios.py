@@ -447,6 +447,3 @@ def calculate_max_drawdown(returns):
 # 4. Métricas adicionales
 st.metric("Máxima Pérdida", f"{max_drawdown:.2%}")
 st.metric("Ratio de Sortino", f"{sortino_ratio:.2f}")
-
-# Ejecutar la aplicación
-streamlit run analisis_portafolios.py
