@@ -27,9 +27,9 @@ import matplotlib.pyplot as plt
 
 st.title ("💼 Smart Portafolio")
 st.write("""
-Esta aplicación analiza un portafolio de inversión aplicando la **Teoría Moderna de Portafolios de Markowitz**.
+Esta aplicación analiza un portafolio de inversión.
 Se simulan tres escenarios (Conservador, Moderado y Agresivo) para observar cómo varían el riesgo, el rendimiento y la composición de activos.
-Los datos se obtienen directamente desde **Yahoo Finance**, y los activos seleccionados pertenecen al sector tecnológico.
+Los datos se obtienen directamente desde **Yahoo Finance**.
 """)
 
 # Configuración de entradas
