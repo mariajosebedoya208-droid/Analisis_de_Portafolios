@@ -205,13 +205,15 @@ st.pyplot(fig)
 st.subheader("📊 Comparación de Escenarios de Inversión")
 
 fig_all, axs = plt.subplots(1, 3, figsize=(12, 4))
-for i, (nombre, w) in enumerate({
-    "Conservador": np.array([0.6, 0.3, 0.1])[:len(tickers)],
-    "Moderado": np.array([0.4, 0.4, 0.2])[:len(tickers)],
-    "Agresivo": np.array([0.2, 0.3, 0.5])[:len(tickers)]
+for i, (nombre, base_pesos) in enumerate({
+    "Conservador": np.linspace(0.6, 0.1, len(tickers)),
+    "Moderado": np.linspace(0.4, 0.2, len(tickers)),
+    "Agresivo": np.linspace(0.2, 0.6, len(tickers))
 }.items()):
-    w = w / np.sum(w)
-    axs[i].pie(w, labels=tickers, autopct='%1.1f%%', startangle=90)
+    w = base_pesos / np.sum(base_pesos)
+    # Aseguramos que las etiquetas coincidan con la cantidad de pesos
+    labels = tickers[:len(w)]
+    axs[i].pie(w, labels=labels, autopct='%1.1f%%', startangle=90)
     axs[i].set_title(nombre)
 
 plt.suptitle("Distribución de Pesos por Tipo de Portafolio")
