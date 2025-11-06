@@ -245,6 +245,7 @@ ax3.grid(True, linestyle='--', alpha=0.6)
 st.pyplot(fig3)
 
 # Heatmap de correlaciones
+
     st.subheader("🔥 Heatmap de Correlaciones")
     corr_matrix = returns[tickers].corr()
     
