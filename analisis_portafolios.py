@@ -104,6 +104,35 @@ escenario = st.sidebar.selectbox("💰 Escenario de Inversión", ["Conservador",
 # Botón para ejecutar
 descargar = st.sidebar.button("📥 Descargar y Analizar")
 
+
+# Validación de tickers
+def validar_tickers(tickers):
+    tickers_validos = []
+    for ticker in tickers:
+        try:
+            info = yf.Ticker(ticker).info
+            if info.get('regularMarketPrice') is not None:
+                tickers_validos.append(ticker)
+            else:
+                st.warning(f"⚠️ Ticker {ticker} no encontrado en Yahoo Finance")
+        except:
+            st.warning(f"⚠️ Error al validar ticker {ticker}")
+    return tickers_validos
+
+# Ejecutar análisis al hacer clic
+if descargar:
+    if len(tickers) == 0:
+        st.error("❌ Por favor ingresa al menos un ticker válido")
+        st.stop()
+    
+    tickers = validar_tickers(tickers)
+    
+    if len(tickers) == 0:
+        st.error("❌ No se encontraron tickers válidos")
+        st.stop()
+
+
+
 # Descarga de datos
 
 data = yf.download(tickers, start=fecha_inicio, end=fecha_fin)["Close"]
