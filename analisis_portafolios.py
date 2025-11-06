@@ -421,3 +421,29 @@ if descargar:
 
 else:
     st.info("👈 Configura los parámetros en la barra lateral y haz clic en 'Descargar y Analizar' para comenzar el análisis.")
+
+
+# Podrías agregar estas funcionalidades:
+
+# 1. Pesos personalizados manualmente
+if st.sidebar.checkbox("🔧 Personalizar pesos manualmente"):
+    st.sidebar.subheader("Pesos Personalizados")
+    custom_weights = []
+    for ticker in tickers:
+        weight = st.sidebar.slider(f"Peso para {ticker}", 0.0, 1.0, 1.0/len(tickers), 0.01)
+        custom_weights.append(weight)
+    # Normalizar y usar estos pesos
+
+# 2. Benchmark comparativo
+benchmark_ticker = st.sidebar.text_input("Ticker Benchmark (opcional)", "SPY")
+
+# 3. Análisis de máxima pérdida (Max Drawdown)
+def calculate_max_drawdown(returns):
+    cumulative = (1 + returns).cumprod()
+    rolling_max = cumulative.expanding().max()
+    drawdown = (cumulative - rolling_max) / rolling_max
+    return drawdown.min()
+
+# 4. Métricas adicionales
+st.metric("Máxima Pérdida", f"{max_drawdown:.2%}")
+st.metric("Ratio de Sortino", f"{sortino_ratio:.2f}")
