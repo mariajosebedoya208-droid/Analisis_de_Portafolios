@@ -244,6 +244,8 @@ ax3.grid(True, linestyle='--', alpha=0.6)
 
 st.pyplot(fig3)
 
+if alguna_condicion:
+    
 # Heatmap de correlaciones
 
     st.subheader("🔥 Heatmap de Correlaciones")
