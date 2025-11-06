@@ -218,3 +218,42 @@ for i, (nombre, base_pesos) in enumerate({
 
 plt.suptitle("Distribución de Pesos por Tipo de Portafolio")
 st.pyplot(fig_all)
+
+# Evaluación y recomendación de escenarios
+
+st.subheader("🤖 Recomendación de Escenario Óptimo")
+
+# Calcular métricas para cada escenario
+resultados = {}
+for nombre, pesos in {
+    "Conservador": np.linspace(0.6, 0.1, len(tickers)),
+    "Moderado": np.linspace(0.4, 0.2, len(tickers)),
+    "Agresivo": np.linspace(0.2, 0.6, len(tickers))
+}.items():
+    w = pesos / np.sum(pesos)
+    rendimiento = np.dot(w, mean_returns)
+    riesgo = np.sqrt(np.dot(w.T, np.dot(cov_matrix, w)))
+    sharpe = rendimiento / riesgo
+    resultados[nombre] = {"rendimiento": rendimiento, "riesgo": riesgo, "sharpe": sharpe}
+
+# Crear DataFrame ordenado
+df_resultados = pd.DataFrame(resultados).T
+df_resultados = df_resultados.sort_values("sharpe", ascending=False)
+
+st.dataframe(df_resultados.style.format({
+    "rendimiento": "{:.2%}",
+    "riesgo": "{:.2%}",
+    "sharpe": "{:.2f}"
+}))
+
+# Determinar el escenario óptimo
+mejor_escenario = df_resultados.index[0]
+st.success(f"✅ El escenario más eficiente según el Ratio de Sharpe es: **{mejor_escenario}** 🎯")
+
+# Comentario interpretativo
+if mejor_escenario == "Conservador":
+    st.info("💡 Recomendación: Este portafolio ofrece mayor estabilidad y menor riesgo. Ideal para perfiles que priorizan seguridad sobre rentabilidad.")
+elif mejor_escenario == "Moderado":
+    st.info("💡 Recomendación: Este portafolio equilibra riesgo y rendimiento, siendo adecuado para inversores con tolerancia media al riesgo.")
+else:
+    st.info("💡 Recomendación: Este portafolio maximiza el rendimiento a costa de mayor volatilidad. Ideal para perfiles arriesgados que buscan crecimiento a largo plazo.")
