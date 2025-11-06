@@ -98,13 +98,13 @@ st.dataframe(returns.describe().T)
 # Escenario de inversión
 
 escenarios = {
-    "Conservador": np.array([0.6, 0.3, 0.1])[:len(tickers)],
-    "Moderado": np.array([0.4, 0.4, 0.2])[:len(tickers)],
-    "Agresivo": np.array([0.2, 0.3, 0.5])[:len(tickers)]
+    "Conservador": np.linspace(0.6, 0.1, len(tickers)),
+    "Moderado": np.linspace(0.4, 0.2, len(tickers)),
+    "Agresivo": np.linspace(0.2, 0.6, len(tickers))
 }
 
 weights = escenarios[escenario]
-weights = weights / np.sum(weights)
+weights = weights / np.sum(weights)  # normalizamos
 
 # Cálculos del portafolio
 
