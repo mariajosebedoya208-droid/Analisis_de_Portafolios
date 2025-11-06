@@ -255,3 +255,55 @@ elif mejor_escenario == "Moderado":
     st.info("💡 Recomendación: Este portafolio equilibra riesgo y rendimiento, siendo adecuado para inversores con tolerancia media al riesgo.")
 else:
     st.info("💡 Recomendación: Este portafolio maximiza el rendimiento a costa de mayor volatilidad. Ideal para perfiles arriesgados que buscan crecimiento a largo plazo.")
+
+from io import BytesIO
+
+st.subheader("📥 Descarga de Resultados")
+
+# Exportar datos a Excel
+excel_buffer = BytesIO()
+
+# Combinar datos y retornos para exportar todo junto
+with pd.ExcelWriter(excel_buffer, engine='xlsxwriter') as writer:
+    data.to_excel(writer, sheet_name='Precios')
+    returns.to_excel(writer, sheet_name='Rendimientos')
+    df_resultados.to_excel(writer, sheet_name='Escenarios')
+
+st.download_button(
+    label="📊 Descargar en Excel",
+    data=excel_buffer.getvalue(),
+    file_name="analisis_portafolio.xlsx",
+    mime="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
+)
+
+# Generar reporte PDF simple (texto) 
+
+reporte = f"""
+SMART PORTAFOLIO - REPORTE DE INVERSIÓN
+
+Escenario seleccionado: {escenario}
+
+Rendimiento esperado: {port_return:.2%}
+Volatilidad esperada: {port_volatility:.2%}
+Ratio de Sharpe: {sharpe_ratio:.2f}
+
+Escenario recomendado: {mejor_escenario}
+
+Activos analizados:
+{', '.join(tickers)}
+
+Conclusión:
+Este análisis aplica la Teoría Moderna de Portafolios de Markowitz, comparando los escenarios conservador, moderado y agresivo. 
+El escenario óptimo se determina en función del Ratio de Sharpe, priorizando la eficiencia riesgo-retorno.
+"""
+
+pdf_buffer = BytesIO()
+pdf_buffer.write(reporte.encode("utf-8"))
+
+st.download_button(
+    label="📄 Descargar Reporte PDF",
+    data=pdf_buffer.getvalue(),
+    file_name="reporte_portafolio.pdf",
+    mime="application/pdf"
+)
+
