@@ -214,30 +214,3 @@ for i, (nombre, w) in enumerate({
 
 plt.suptitle("Distribución de Pesos por Tipo de Portafolio")
 st.pyplot(fig_all)
-
-# Diagrama Comparativo
-
-st.subheader("📉 Comparación de Escenarios - Riesgo vs Rendimiento")
-
-escenario_rend = {
-    "Conservador": np.dot(escenarios["Conservador"], mean_returns),
-    "Moderado": np.dot(escenarios["Moderado"], mean_returns),
-    "Agresivo": np.dot(escenarios["Agresivo"], mean_returns)
-}
-
-escenario_riesgo = {
-    "Conservador": np.sqrt(np.dot(escenarios["Conservador"].T, np.dot(cov_matrix, escenarios["Conservador"]))),
-    "Moderado": np.sqrt(np.dot(escenarios["Moderado"].T, np.dot(cov_matrix, escenarios["Moderado"]))),
-    "Agresivo": np.sqrt(np.dot(escenarios["Agresivo"].T, np.dot(cov_matrix, escenarios["Agresivo"])))
-}
-
-fig, ax = plt.subplots()
-ax.scatter(escenario_riesgo.values(), escenario_rend.values(), c=['green','orange','red'], s=100)
-
-for i, nombre in enumerate(escenario_rend.keys()):
-    ax.text(list(escenario_riesgo.values())[i]+0.001, list(escenario_rend.values())[i], nombre, fontsize=9)
-
-ax.set_xlabel("Volatilidad (Riesgo)")
-ax.set_ylabel("Rendimiento Esperado")
-ax.set_title("Comparación de Escenarios de Inversión")
-st.pyplot(fig)
