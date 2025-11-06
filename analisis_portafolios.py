@@ -278,32 +278,28 @@ st.download_button(
 
 # Generar reporte PDF simple (texto) 
 
-reporte = f"""
-SMART PORTAFOLIO - REPORTE DE INVERSIÓN
-
-Escenario seleccionado: {escenario}
-
-Rendimiento esperado: {port_return:.2%}
-Volatilidad esperada: {port_volatility:.2%}
-Ratio de Sharpe: {sharpe_ratio:.2f}
-
-Escenario recomendado: {mejor_escenario}
-
-Activos analizados:
-{', '.join(tickers)}
-
-Conclusión:
-Este análisis aplica la Teoría Moderna de Portafolios de Markowitz, comparando los escenarios conservador, moderado y agresivo. 
-El escenario óptimo se determina en función del Ratio de Sharpe, priorizando la eficiencia riesgo-retorno.
-"""
+from reportlab.lib.pagesizes import letter
+from reportlab.pdfgen import canvas
 
 pdf_buffer = BytesIO()
-pdf_buffer.write(reporte.encode("utf-8"))
+c = canvas.Canvas(pdf_buffer, pagesize=letter)
+c.setFont("Helvetica", 12)
+
+c.drawString(100, 750, "SMART PORTAFOLIO - REPORTE DE INVERSIÓN")
+c.drawString(100, 720, f"Escenario seleccionado: {escenario}")
+c.drawString(100, 700, f"Rendimiento esperado: {port_return:.2%}")
+c.drawString(100, 680, f"Volatilidad esperada: {port_volatility:.2%}")
+c.drawString(100, 660, f"Ratio de Sharpe: {sharpe_ratio:.2f}")
+c.drawString(100, 640, f"Escenario recomendado: {mejor_escenario}")
+c.drawString(100, 620, f"Activos analizados: {', '.join(tickers)}")
+
+c.showPage()
+c.save()
+pdf_buffer.seek(0)
 
 st.download_button(
-    label="📄 Descargar Reporte PDF",
-    data=pdf_buffer.getvalue(),
+    label="📄 Descargar Reporte en PDF",
+    data=pdf_buffer,
     file_name="reporte_portafolio.pdf",
     mime="application/pdf"
 )
-
