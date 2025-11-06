@@ -25,6 +25,10 @@ from PIL import Image
 logo = Image.open("logo.png")
 st.image(logo, caption="Smart Portafolio", use_column_width=True)
 
+st.image("https://upload.wikimedia.org/wikipedia/commons/8/89/HD_transparent_picture.png", 
+         caption="Smart Portafolio", 
+         use_column_width=True)
+
 st.write("""
 Esta aplicación realiza una **simulación de escenarios de inversión**, aplicando la *Teoría Moderna de Portafolios de Markowitz*.
 
