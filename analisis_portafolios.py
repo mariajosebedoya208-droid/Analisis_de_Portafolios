@@ -244,21 +244,26 @@ ax3.grid(True, linestyle='--', alpha=0.6)
 
 st.pyplot(fig3)
 
-#  Correlaciones
-
-st.subheader("🔥 Correlaciones entre Activos")
-corr_matrix = returns[tickers].corr()
-st.dataframe(corr_matrix)
-
-fig4, ax4 = plt.subplots()
-cax = ax4.imshow(corr_matrix, cmap="coolwarm", interpolation="nearest")
-plt.title("Matriz de Correlaciones")
-plt.colorbar(cax)
-ax4.set_xticks(range(len(corr_matrix)))
-ax4.set_xticklabels(corr_matrix.columns, rotation=45)
-ax4.set_yticks(range(len(corr_matrix)))
-ax4.set_yticklabels(corr_matrix.columns)
-st.pyplot(fig4)
+# Heatmap de correlaciones
+    st.subheader("🔥 Heatmap de Correlaciones")
+    corr_matrix = returns[tickers].corr()
+    
+    fig4, ax4 = plt.subplots(figsize=(8, 6))
+    im = ax4.imshow(corr_matrix, cmap="coolwarm", interpolation="nearest", vmin=-1, vmax=1)
+    
+    # Mostrar valores en las celdas
+    for i in range(len(corr_matrix)):
+        for j in range(len(corr_matrix)):
+            text = ax4.text(j, i, f'{corr_matrix.iloc[i, j]:.2f}',
+                           ha="center", va="center", color="black", fontsize=10)
+    
+    plt.colorbar(im, ax=ax4)
+    ax4.set_xticks(range(len(corr_matrix)))
+    ax4.set_xticklabels(corr_matrix.columns, rotation=45)
+    ax4.set_yticks(range(len(corr_matrix)))
+    ax4.set_yticklabels(corr_matrix.columns)
+    ax4.set_title("Matriz de Correlaciones")
+    st.pyplot(fig4)
 
 # Visualización del portafolio
 
