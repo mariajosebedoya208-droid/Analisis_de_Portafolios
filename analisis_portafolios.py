@@ -127,11 +127,11 @@ st.markdown("---")
 st.subheader("🧠 Interpretación del Escenario Seleccionado")
 
 if escenario == "Conservador":
-    st.info("🔹 Este portafolio busca minimizar el riesgo, con un enfoque en estabilidad. Su rendimiento esperado es menor, pero ofrece menor volatilidad y pérdidas potenciales.")
+    st.info("🟩 Este portafolio busca minimizar el riesgo, con un enfoque en estabilidad. Su rendimiento esperado es menor, pero ofrece menor volatilidad y pérdidas potenciales.")
 elif escenario == "Moderado":
     st.info("🟨 Este portafolio equilibra riesgo y rendimiento. Es ideal para inversores con tolerancia media al riesgo que buscan un crecimiento sostenido.")
 else:
-    st.info("🔺 Este portafolio asume mayor riesgo con el objetivo de maximizar el rendimiento. Es adecuado para inversionistas con alta tolerancia a la volatilidad y posibles pérdidas.")
+    st.info("🟥 Este portafolio asume mayor riesgo con el objetivo de maximizar el rendimiento. Es adecuado para inversionistas con alta tolerancia a la volatilidad y posibles pérdidas.")
 
 # Evolución del valor monetario
 
