@@ -17,7 +17,7 @@ import numpy as np
 import yfinance as yf
 import matplotlib.pyplot as plt
 
-st.markdown("<h1 style='text-align: center;'>Smart Portafolio - Simulación de Escenarios</h1>", unsafe_allow_html=True)
+st.markdown("<h1 style='text-align: center; color:#004aad;'>Smart Portafolio - Simulación de Escenarios</h1>", unsafe_allow_html=True)
 st.write("""
 Esta aplicación realiza una **simulación de escenarios de inversión**, aplicando la *Teoría Moderna de Portafolios de Markowitz*.
 
