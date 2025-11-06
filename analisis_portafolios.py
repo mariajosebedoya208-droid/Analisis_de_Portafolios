@@ -17,7 +17,51 @@ import numpy as np
 import yfinance as yf
 import matplotlib.pyplot as plt
 
-st.markdown("<h1 style='text-align: center; color:#004aad;'>Smart Portafolio - Simulación de Escenarios</h1>", unsafe_allow_html=True)
+st.markdown("""
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap');
+    
+    .main-header {
+        font-family: 'Inter', sans-serif;
+        text-align: center;
+        background: linear-gradient(135deg, #a8e6cf 0%, #dcedc1 50%, #ffd3b6 100%);
+        padding: 2rem;
+        border-radius: 15px;
+        margin-bottom: 2rem;
+        color: #2c5530;
+        box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        border: 2px solid #b8dfd8;
+    }
+    
+    .main-title {
+        font-size: 2.8rem;
+        font-weight: 700;
+        margin-bottom: 0.5rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 15px;
+    }
+    
+    .main-subtitle {
+        font-size: 1.2rem;
+        opacity: 0.8;
+        font-weight: 400;
+        color: #4a7c59;
+    }
+</style>
+
+<div class="main-header">
+    <div class="main-title">
+        <span>🌱</span>
+        <span>Smart Portafolio</span>
+        <span>📊</span>
+    </div>
+    <div class="main-subtitle">
+        Simulación de Escenarios • Crecimiento Inteligente
+    </div>
+</div>
+""", unsafe_allow_html=True)
 
 st.write("""
 Esta aplicación realiza una **simulación de escenarios de inversión**, aplicando la *Teoría Moderna de Portafolios de Markowitz*.
