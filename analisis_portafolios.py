@@ -130,9 +130,6 @@ if descargar:
         st.error("❌ No se encontraron tickers válidos")
         st.stop()
 
-else:
-    st.info("👈 Configura los parámetros en la barra lateral y haz clic en 'Descargar y Analizar' para comenzar el análisis.")
-
 # Descarga de datos
 
 data = yf.download(tickers, start=fecha_inicio, end=fecha_fin)["Close"]
@@ -437,3 +434,6 @@ st.download_button(
     file_name="Reporte_Portafolio.pdf",
     mime="application/pdf"
 )
+
+else:
+    st.info("👈 Configura los parámetros en la barra lateral y haz clic en 'Descargar y Analizar' para comenzar el análisis.")
