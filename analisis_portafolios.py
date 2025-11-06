@@ -104,8 +104,6 @@ escenario = st.sidebar.selectbox("💰 Escenario de Inversión", ["Conservador",
 # Botón para ejecutar
 descargar = st.sidebar.button("📥 Descargar y Analizar")
 
-if descargar:
-
 # Validación de tickers
 def validar_tickers(tickers):
     tickers_validos = []
@@ -122,6 +120,7 @@ def validar_tickers(tickers):
 
 # Ejecutar análisis al hacer clic
 
+if descargar:
     if len(tickers) == 0:
         st.error("❌ Por favor ingresa al menos un ticker válido")
         st.stop()
@@ -144,8 +143,6 @@ if frecuencia == "Semanal":
     data = data.resample('W').last()
 elif frecuencia == "Mensual":
     data = data.resample('M').last()
-    
-# Funciones de exportación
 
 # Visualización de Precios
 
@@ -364,7 +361,7 @@ from reportlab.lib.units import inch
 from reportlab.platypus import SimpleDocTemplate, Paragraph, Spacer, Table, TableStyle
 from reportlab.lib.styles import getSampleStyleSheet
 
-# --- Crear PDF con formato ---
+# Crear PDF con formato
 st.subheader("📄 Generar Reporte en PDF")
 
 pdf_buffer = BytesIO()
@@ -374,12 +371,12 @@ doc = SimpleDocTemplate(pdf_buffer, pagesize=letter)
 styles = getSampleStyleSheet()
 elements = []
 
-# --- Título ---
+# Título
 title = Paragraph("<b><font size=18 color='#004aad'>SMART PORTAFOLIO - REPORTE DE INVERSIÓN</font></b>", styles["Title"])
 elements.append(title)
 elements.append(Spacer(1, 0.2 * inch))
 
-# --- Datos generales ---
+# Datos generales
 intro = Paragraph(f"""
 <font size=12>
 <b>Escenario seleccionado:</b> {escenario}<br/>
@@ -390,7 +387,7 @@ intro = Paragraph(f"""
 elements.append(intro)
 elements.append(Spacer(1, 0.2 * inch))
 
-# --- Resultados ---
+# Resultados
 resumen_data = [
     ["Métrica", "Valor"],
     ["Rendimiento esperado", f"{port_return:.2%}"],
@@ -412,7 +409,7 @@ table.setStyle(TableStyle([
 elements.append(table)
 elements.append(Spacer(1, 0.3 * inch))
 
-# --- Conclusión ---
+# Conclusión
 conclusion = Paragraph(f"""
 <font size=12>
 La simulación de escenarios permite observar cómo el riesgo y el rendimiento están estrechamente relacionados.<br/>
@@ -426,7 +423,7 @@ else "Este portafolio busca maximizar ganancias, ideal para perfiles arriesgados
 """, styles["Normal"])
 elements.append(conclusion)
 
-# --- Guardar PDF ---
+# Guardar PDF
 doc.build(elements)
 pdf_buffer.seek(0)
 
