@@ -3,3 +3,6 @@ yfinance
 pandas
 numpy
 matplotlib
+seaborn
+fpdf
+xlsxwriter
