@@ -17,14 +17,6 @@ import numpy as np
 import yfinance as yf
 import matplotlib.pyplot as plt
 
-# Encabezado principal
-
-import streamlit as st
-import pandas as pd
-import numpy as np
-import yfinance as yf
-import matplotlib.pyplot as plt
-
 st.title ("💼 Smart Portafolio")
 st.write("""
 Esta aplicación analiza un portafolio de inversión.
@@ -55,6 +47,11 @@ inversion_inicial = st.sidebar.number_input("💰 Inversión Inicial (USD)", min
 
 # Frecuencia temporal
 frecuencia = st.sidebar.selectbox("⏱️ Frecuencia Temporal", ["Diaria", "Semanal", "Mensual"])
+
+if frecuencia == "Semanal":
+    data = data.resample('W').last()
+elif frecuencia == "Mensual":
+    data = data.resample('M').last()
 
 # Tipo de escenario
 escenario = st.sidebar.selectbox("💰 Escenario de Inversión", ["Conservador", "Moderado", "Agresivo"])
@@ -201,3 +198,5 @@ for i, (nombre, w) in enumerate({
 
 plt.suptitle("Distribución de Pesos por Tipo de Portafolio")
 st.pyplot(fig_all)
+
+st.info("💡 Consejo: Diversificar entre activos con baja correlación puede reducir el riesgo del portafolio.")
