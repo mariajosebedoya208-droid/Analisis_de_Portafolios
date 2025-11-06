@@ -19,30 +19,22 @@ import matplotlib.pyplot as plt
 
 st.markdown("<h1 style='text-align: center; color:#004aad;'>Smart Portafolio - Simulación de Escenarios</h1>", unsafe_allow_html=True)
 
-import matplotlib.pyplot as plt
-import numpy as np
-import io
-
-# --- Crear logo dinámico desde código ---
-fig, ax = plt.subplots(figsize=(6, 1.5))
-ax.axis("off")
-fig.patch.set_facecolor("white")
-
-# Fondo degradado
-x = np.linspace(0, 1, 256)
-ax.imshow(np.tile(x, (50, 1)), cmap="Greens", extent=[0, 1, 0, 1])
-
-# Texto del logo
-ax.text(0.5, 0.5, "SMART PORTAFOLIO",
-        color="white", fontsize=22, fontweight="bold",
-        ha="center", va="center")
-
-# Subtexto
-ax.text(0.5, 0.15, "Simulación de Escenarios de Inversión",
-        color="#d9fdd3", fontsize=10, ha="center", va="center")
-
-# Mostrar en Streamlit
-st.pyplot(fig)
+st.markdown("""
+<div style="
+    background: linear-gradient(90deg, #009970, #00c47a);
+    padding: 20px;
+    border-radius: 12px;
+    text-align: center;
+    color: white;
+    font-family: 'Trebuchet MS', sans-serif;
+">
+    <h1 style="margin-bottom: 5px;">💼 Smart Portafolio</h1>
+    <h4 style="margin-top: 0;">Simulación de Escenarios de Inversión</h4>
+    <p style="font-size:16px; opacity:0.9;">
+        Conservador • Moderado • Agresivo
+    </p>
+</div>
+""", unsafe_allow_html=True)
 
 st.write("""
 Esta aplicación realiza una **simulación de escenarios de inversión**, aplicando la *Teoría Moderna de Portafolios de Markowitz*.
