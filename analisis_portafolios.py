@@ -72,7 +72,7 @@ st.dataframe(data.tail())
 # Funciones de exportación
 
 # Excel
-rom io import BytesIO
+from io import BytesIO
 
 excel_buffer = BytesIO()
 data.to_excel(excel_buffer, index=True)
