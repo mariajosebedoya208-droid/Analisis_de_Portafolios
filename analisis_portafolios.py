@@ -104,7 +104,9 @@ escenario = st.sidebar.selectbox("💰 Escenario de Inversión", ["Conservador",
 # Botón para ejecutar
 descargar = st.sidebar.button("📥 Descargar y Analizar")
 
-
+else:
+    st.info("👈 Configura los parámetros en la barra lateral y haz clic en 'Descargar y Analizar' para comenzar el análisis.")
+    
 # Validación de tickers
 def validar_tickers(tickers):
     tickers_validos = []
