@@ -54,11 +54,6 @@ inversion_inicial = st.sidebar.number_input("💰 Inversión Inicial (USD)", min
 # Frecuencia temporal
 frecuencia = st.sidebar.selectbox("⏱️ Frecuencia Temporal", ["Diaria", "Semanal", "Mensual"])
 
-if frecuencia == "Semanal":
-    data = data.resample('W').last()
-elif frecuencia == "Mensual":
-    data = data.resample('M').last()
-
 # Tipo de escenario
 escenario = st.sidebar.selectbox("💰 Escenario de Inversión", ["Conservador", "Moderado", "Agresivo"])
 
@@ -72,6 +67,13 @@ data = yf.download(tickers, start=fecha_inicio, end=fecha_fin)["Close"]
 st.subheader("📊 Datos Descargados")
 st.dataframe(data.tail())
 
+# Ajuste según frecuencia
+
+if frecuencia == "Semanal":
+    data = data.resample('W').last()
+elif frecuencia == "Mensual":
+    data = data.resample('M').last()
+    
 # Funciones de exportación
 
 # Visualización de Precios
